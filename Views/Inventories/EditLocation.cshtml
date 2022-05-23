@@ -1,0 +1,51 @@
+﻿@model ShopifyBackend.Models.ViewModels.InventoryLocationViewModel
+
+@{
+    ViewData["Title"] = "Edit Location";
+}
+
+<h1>Edit Location</h1>
+
+<h4>Inventory</h4>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Inventory.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Inventory.Name)
+        </dd>
+    </dl>
+</div>
+<hr />
+<table class="table">
+    @foreach (var item in Model.Locations)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>          
+            @if (Model.Location != null && item.Id == Model.Location.Id)
+            {
+                <td>
+                     <a asp-action="RemoveLocation" asp-route-lid="@item.Id" asp-route-iid="@Model.Inventory.Id">Remove</a> 
+                </td>
+            }
+            @if (Model.Location == null || item.Id != Model.Location.Id){
+                <td>
+                     <a asp-action="AddLocation" asp-route-lid="@item.Id" asp-route-iid="@Model.Inventory.Id">Add</a> 
+                </td>
+            }
+        </tr>
+    }
+</table>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

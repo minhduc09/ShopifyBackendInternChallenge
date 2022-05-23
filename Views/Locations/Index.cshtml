@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ShopifyBackend.Models.Location>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Location</h1>
+
+<p>To create a location, click on Create New and enter an ID and a Name</p>
+<p>If you delete a location, all inventories stored in that location will lose location and has "Undefined" location (no error shows up)</p>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
